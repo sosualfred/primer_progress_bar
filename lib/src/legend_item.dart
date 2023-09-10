@@ -27,15 +27,6 @@ class LegendItem extends StatelessWidget {
           segment.label == null),
     );
 
-    final handle = SizedBox.square(
-      dimension: style.handleSize,
-      child: DecoratedBox(
-        decoration: style.handleDecoration.copyWith(
-          color: segment.color,
-        ),
-      ),
-    );
-
     final Widget? label;
     if (style.behavior != LegendItemBehavior.onlyValue &&
         segment.label != null) {
@@ -70,13 +61,22 @@ class LegendItem extends StatelessWidget {
     }
 
     return style.padding.wrap(
-      Row(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          style.handlePadding.wrap(handle),
-          if (label != null) style.labelPadding.wrap(label),
-          if (valueLabel != null) style.valueLabelPadding.wrap(valueLabel),
-        ],
+      Container(
+        padding: const EdgeInsets.symmetric(
+          horizontal: 6,
+          vertical: 2,
+        ),
+        decoration: style.handleDecoration.copyWith(
+          color: segment.color.withOpacity(0.12),
+          borderRadius: BorderRadius.circular(16),
+        ),
+        child: Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            if (label != null) style.labelPadding.wrap(label),
+            if (valueLabel != null) style.valueLabelPadding.wrap(valueLabel),
+          ],
+        ),
       ),
     );
   }
@@ -124,7 +124,6 @@ enum LegendItemBehavior {
   both,
 }
 
-
 /// An immutable style that can be applied to [LegendItem]s.
 @immutable
 class LegendItemStyle {
@@ -149,7 +148,7 @@ class LegendItemStyle {
   /// The maximum width of the label.
   final double maxLabelSize;
 
-  /// The decoration applied to the handle. 
+  /// The decoration applied to the handle.
   final BoxDecoration handleDecoration;
 
   /// The padding around the handle.
@@ -168,13 +167,13 @@ class LegendItemStyle {
   final LegendItemBehavior behavior;
 
   /// The fallback style for the [Segment.label].
-  /// 
+  ///
   /// If the label of [LegendItem.segment] has no [TextStyle],
   /// this style is used instead.
   final TextStyle? labelStyle;
 
   /// The fallback style for the [Segment.valueLabel].
-  /// 
+  ///
   /// If the value label of [LegendItem.segment] has no [TextStyle],
   /// this style is used instead.
   final TextStyle? valueLabelStyle;
