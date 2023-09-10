@@ -66,7 +66,7 @@ class LegendItem extends StatelessWidget {
           horizontal: 6,
           vertical: 2,
         ),
-        decoration: style.handleDecoration.copyWith(
+        decoration: BoxDecoration(
           color: segment.color.withOpacity(0.12),
           borderRadius: BorderRadius.circular(16),
         ),
@@ -98,8 +98,6 @@ class LegendItem extends StatelessWidget {
     return LegendItemStyle(
       handleSize: style?.handleSize ?? defaultStyle.handleSize,
       maxLabelSize: style?.maxLabelSize ?? defaultStyle.maxLabelSize,
-      handleDecoration:
-          style?.handleDecoration ?? defaultStyle.handleDecoration,
       handlePadding: style?.handlePadding ?? defaultStyle.handlePadding,
       labelPadding: style?.labelPadding ?? defaultStyle.labelPadding,
       valueLabelPadding:
@@ -131,7 +129,6 @@ class LegendItemStyle {
   const LegendItemStyle({
     this.handleSize = 10,
     this.maxLabelSize = 160,
-    this.handleDecoration = const BoxDecoration(shape: BoxShape.circle),
     this.handlePadding = const EdgeInsets.symmetric(horizontal: 4),
     this.labelPadding = const EdgeInsets.symmetric(horizontal: 2),
     this.valueLabelPadding = const EdgeInsets.symmetric(horizontal: 2),
@@ -147,9 +144,6 @@ class LegendItemStyle {
 
   /// The maximum width of the label.
   final double maxLabelSize;
-
-  /// The decoration applied to the handle.
-  final BoxDecoration handleDecoration;
 
   /// The padding around the handle.
   final EdgeInsets handlePadding;
@@ -185,7 +179,6 @@ class LegendItemStyle {
           runtimeType == other.runtimeType &&
           maxLabelSize == other.maxLabelSize &&
           handleSize == other.handleSize &&
-          handleDecoration == other.handleDecoration &&
           handlePadding == other.handlePadding &&
           labelPadding == other.labelPadding &&
           valueLabelPadding == other.valueLabelPadding &&
@@ -199,7 +192,6 @@ class LegendItemStyle {
         runtimeType,
         maxLabelSize,
         handleSize,
-        handleDecoration,
         handlePadding,
         labelPadding,
         valueLabelPadding,
